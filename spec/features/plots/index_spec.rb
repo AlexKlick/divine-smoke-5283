@@ -23,13 +23,13 @@ RSpec.describe 'Plot Index' do
   # And under each plot number I see names of all that plot's plants
   it 'has a list of the plot numbers and under each number there are the plot plants' do
     #expect to find all plants in plot1, only plants1/2 in plot 2
-    within('#plot1') do
+    within("#plot#{@plot1.id}") do
       expect(page).to have_content(@plant1.name)
       expect(page).to have_content(@plant2.name)
       expect(page).to have_content(@plant3.name)
       expect(page).to have_content(@plant4.name)
     end
-    within('#plot2') do
+    within("#plot#{@plot2.id}") do
     expect(page).to have_content(@plant1.name)
     expect(page).to have_content(@plant2.name)
     expect(page).to_not have_content(@plant3.name)

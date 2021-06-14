@@ -1,0 +1,17 @@
+<h1>Plots Index</h1>
+<table >
+  <tr>
+    <th>name</th>
+  </tr>
+  <% @plots.each do |plot| %>
+    <tbody id="plot<%=plot.id%>">
+      <% plot.plants.each do |plant| %>
+        <tr>
+          <td>
+            <%= plant.name%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
