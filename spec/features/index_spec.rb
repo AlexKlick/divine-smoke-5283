@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Plot Index' do
   before(:each) do
-    @plot1 = Plot.create(number: 25, size:"large", direction:"west")
-    @plot2 = Plot.create(number: 10, size:"medium", direction:"south")
+    @garden = Garden.create(name:'Sunny Acres', organic: true)
+    @plot1 = Plot.create(number: 25, size:"large", direction:"west", garden_id:@garden.id)
+    @plot2 = Plot.create(number: 10, size:"medium", direction:"south", garden_id:@garden.id)
     @plant1 = Plant.create(name:'lilly', description:'pretty flower', days_til_harvest: 10)
     @plant2 = Plant.create(name:'sunflower', description:'pretty flower, tasty seeds', days_til_harvest: 20)
     @plant3 = Plant.create(name:'strawberry', description:'yummy', days_til_harvest: 30)
