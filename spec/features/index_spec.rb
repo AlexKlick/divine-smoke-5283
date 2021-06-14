@@ -14,13 +14,13 @@ RSpec.describe 'Plot Index' do
     @plant_plots4 = PlantPlot.create(plot_id: @plot1.id ,plant_id:@plant4.id)
     @plant_plots5 = PlantPlot.create(plot_id: @plot2.id ,plant_id:@plant1.id)
     @plant_plots6 = PlantPlot.create(plot_id: @plot2.id ,plant_id:@plant2.id)
+    visit '/plots'
   end
   # As a visitor
   # When I visit the plots index page ('/plots')
   # I see a list of all plot numbers
   # And under each plot number I see names of all that plot's plants
   it 'has a list of the plot numbers and under each number there are the plot plants' do
-    visit '/plots'
     #expect to find all plants in plot1, only plants1/2 in plot 2
     within('#plot1') do
       expect(page).to have_content(@plant1.name)
@@ -36,5 +36,35 @@ RSpec.describe 'Plot Index' do
     end
   end
 
-  
+  # As a visitor
+  # When I visit a plot's index page
+  # Next to each plant's name
+  # I see a link to remove that plant from that plot
+  # When I click on that link
+  # I'm returned to the plots index page
+  # And I no longer see that plant listed under that plot
+  # (Note: you should not destroy the plant record entirely)
+
+  it 'for each plant, has a link to remove it from the plot' do
+    expect(page).to have_content('delete', count: 6)
+  end
+
+  it 'upon clicking, am redirected back to index and plant in gone from plot' do
+    within('#plot1') do
+      expect(page).to have_content(@plant1.id)
+    end
+    click_on("#del-#{@plant_plots1.id}")
+    expect(current_path).to eq '/plots'
+    within('#plot1') do
+      expect(page).to_not have_content(@plant1.id)
+    end
+  end
+
+  it 'does not delete plant' do
+    click_on("#del-#{@plant_plots1.id}")
+    expect(current_path).to eq '/plots'
+    within('#plot2') do
+      expect(page).to have_content(@plant1.id)
+    end
+  end
 end
