@@ -37,6 +37,7 @@ RSpec.describe 'Garden Show' do
     expect(page).to have_content(@plant1.name, count: 1)
     expect(page).to have_content(@plant2.name, count: 1)
     expect(page).to have_content(@plant3.name, count: 1)
+    expect(page).to_not have_content(@plant4.name)
     expect(page).to_not have_content(@plant5.name)
   end
 
