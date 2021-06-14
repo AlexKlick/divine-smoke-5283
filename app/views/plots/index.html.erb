@@ -5,10 +5,13 @@
   </tr>
   <% @plots.each do |plot| %>
     <tbody id="plot<%=plot.id%>">
-      <% plot.plants.each do |plant| %>
+      <% plot.plant_plots.each do |pplot| %>
         <tr>
           <td>
-            <%= plant.name%>
+            <%= pplot.plant.name%>
+          </td>
+          <td>
+            <%= link_to "delete",plant_plot_path(id: pplot.id), action: :destroy%>
           </td>
         </tr>
       <% end %>
