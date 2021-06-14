@@ -47,13 +47,27 @@ RSpec.describe 'Garden Show' do
   # plots from most to least(Note: you should only make 1 database query to retrieve the sorted list of plants)
 
   it 'has the plant list sorted by # number of that plant which is in the garden (plant popularity?)' do
-    #this story was a little confusing to read, but I think it's asking for the plants sorted by number of times they are in plots?
+    #this story was a little confusing to read, but I think it's asking for the plants sorted by number of times they appear
+    #in plots within the garden?
+
     #so we should see plants 1-2 first and the rest, besides 5, after
-    
-    expect(@plant1.name).to appear_before(@plant3.name)
-    expect(@plant2.name).to appear_before(@plant3.name)
-    expect(@plant1.name).to appear_before(@plant4.name)
-    expect(@plant2.name).to appear_before(@plant4.name)
+    # this = @plant1.name
+    # that = @plant2.name
+    # expect(this).to appear_before(that)
+    # expect(@plant2.name).to appear_before(@plant3.name)
+    # expect(@plant1.name).to appear_before(@plant4.name)
+    # expect(@plant2.name).to appear_before(@plant4.name)
+
+    #appear_before is showing undefined method.. not sure why
+
+    @plot4 = Plot.create(number: 10, size:"medium", direction:"south", garden_id:@garden.id)
+    @plant_plots8 = PlantPlot.create(plot_id: @plot4.id ,plant_id:@plant2.id)
+  binding.pry
+    #adding in an extra plant 2 so it should come before plant 1 now
+  save_and_open_page
+    expect(page.text.index(@plant1.name)).to be < page.text.index(@plant3.name)
+    expect(page.text.index(@plant2.name)).to be < page.text.index(@plant1.name)
+    expect(page.text.index(@plant2.name)).to be < page.text.index(@plant3.name)
   end
 
 end
