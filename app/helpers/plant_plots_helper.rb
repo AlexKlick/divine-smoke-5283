@@ -1,0 +1,2 @@
+module PlantPlotsHelper
+end
