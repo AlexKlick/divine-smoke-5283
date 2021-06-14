@@ -24,12 +24,14 @@ RSpec.describe 'Plot Index' do
   it 'has a list of the plot numbers and under each number there are the plot plants' do
     #expect to find all plants in plot1, only plants1/2 in plot 2
     within("#plot#{@plot1.id}") do
+      expect(page).to have_content(@plot1.number)
       expect(page).to have_content(@plant1.name)
       expect(page).to have_content(@plant2.name)
       expect(page).to have_content(@plant3.name)
       expect(page).to have_content(@plant4.name)
     end
     within("#plot#{@plot2.id}") do
+    expect(page).to have_content(@plot2.number)
     expect(page).to have_content(@plant1.name)
     expect(page).to have_content(@plant2.name)
     expect(page).to_not have_content(@plant3.name)
@@ -51,20 +53,20 @@ RSpec.describe 'Plot Index' do
   end
 
   it 'upon clicking, am redirected back to index and plant in gone from plot' do
-    within('#plot1') do
-      expect(page).to have_content(@plant1.id)
+    within("#plot#{@plot1.id}") do
+      expect(page).to have_content(@plant1.name)
     end
     click_on("#del-#{@plant_plots1.id}")
     expect(current_path).to eq '/plots'
-    within('#plot1') do
-      expect(page).to_not have_content(@plant1.id)
+    within("#plot#{@plot1.id}") do
+      expect(page).to_not have_content(@plant1.name)
     end
   end
 
   it 'does not delete plant' do
     click_on("#del-#{@plant_plots1.id}")
     expect(current_path).to eq '/plots'
-    within('#plot2') do
+    within("#plot#{@plot2.id}") do
       expect(page).to have_content(@plant1.id)
     end
   end
