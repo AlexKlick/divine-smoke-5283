@@ -5,6 +5,9 @@
   </tr>
   <% @plots.each do |plot| %>
     <tbody id="plot<%=plot.id%>">
+      <tr> 
+        <td><%= plot.number %></td>
+      </tr>
       <% plot.plant_plots.each do |pplot| %>
         <tr>
           <td>
