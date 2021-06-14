@@ -26,7 +26,7 @@ RSpec.describe Garden do
     @plant_plots6 = PlantPlot.create(plot_id: @plot2.id ,plant_id:@plant2.id)
     @plant_plots7 = PlantPlot.create(plot_id: @plot3.id ,plant_id:@plant5.id)
   end
-  describe 'class methods' do
+  describe 'instance methods' do
     describe 'g_plants' do
       it 'returns the plant name for garden that have less than 100 days til harvest' do
         expect(@garden.g_plants).to eq ["lilly", "sunflower", "strawberry"]
