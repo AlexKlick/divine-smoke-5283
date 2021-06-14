@@ -56,7 +56,7 @@ RSpec.describe 'Plot Index' do
     within("#plot#{@plot1.id}") do
       expect(page).to have_content(@plant1.name)
     end
-    click_on("#del-#{@plant_plots1.id}")
+    find("#del-#{@plant_plots1.id}").click
     expect(current_path).to eq '/plots'
     within("#plot#{@plot1.id}") do
       expect(page).to_not have_content(@plant1.name)
@@ -64,10 +64,10 @@ RSpec.describe 'Plot Index' do
   end
 
   it 'does not delete plant' do
-    click_on("#del-#{@plant_plots1.id}")
+    find("#del-#{@plant_plots1.id}").click
     expect(current_path).to eq '/plots'
     within("#plot#{@plot2.id}") do
-      expect(page).to have_content(@plant1.id)
+      expect(page).to have_content(@plant1.name)
     end
   end
 end

@@ -14,7 +14,7 @@
             <%= pplot.plant.name%>
           </td>
           <td>
-            <%= link_to "delete",plant_plot_path(id: pplot.id), action: :destroy%>
+            <%= link_to "delete", pplot , method: "delete", id: "del-#{pplot.id}"%>
           </td>
         </tr>
       <% end %>
